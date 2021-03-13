@@ -1,17 +1,17 @@
-var DEBUG=false;
 
-function logDebug(msg){
-	if(DEBUG){
-		console.log(msg);
-	}
-}
+
+function logDebug(msg){}
 
 function startDebug(){
-	DEBUG=true;
+	logDebug =(msg) =>{
+		console.log("DEBUG: "+msg);
+	};
 }
 
-function stopDebug(){
-	DEBUG=false;
+function stopDebug(){	
+	logDebug =(msg) =>{
+		console.log("DEBUG: "+msg);
+	};
 }
 
 let MoanerIsLoaded;
