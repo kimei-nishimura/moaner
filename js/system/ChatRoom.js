@@ -36,7 +36,7 @@ function initActivityOrgasmStart(){
 	backupActivityOrgasmStart = ActivityOrgasmStart;
 		ActivityOrgasmStart = (C) => {
 		
-		if(scriptOn && C.MemberNumber==Player.MemberNumber){
+		if(scriptOn && C.MemberNumber==Player.MemberNumber && window.CurrentScreen=="ChatRoom"){
 			if(C.ID==0 && C.MemberNumber==Player.MemberNumber){
 				var moan;
 				var backupChatRoomTargetMemberNumber=null;
@@ -61,7 +61,7 @@ function initActivityOrgasmStart(){
 						ChatRoomSendChat();
 						ChatRoomTargetMemberNumber=backupChatRoomTargetMemberNumber;
 						ElementValue("InputChat",msg);
-					}
+					} 
 				}
 			}
 		}
