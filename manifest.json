@@ -1,7 +1,7 @@
 {
   "name": "Myrhanda moaner",
   "description": "Chrome Extension for Bondage Club. Apply moans in your chat when you're horny and vibrated.",
-  "version": "1.0",
+  "version": "1.0.1",
   "manifest_version": 2,
     "background": {
         "scripts": [
