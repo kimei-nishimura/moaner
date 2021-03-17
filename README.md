@@ -1,5 +1,5 @@
 # Moaner
- Chrome Extension for Bondage Club. It applies moans in your chat when you're horny and stimulated.
+ Chrome Extension for Bondage Club. It applies moans in your chat when you're horny and stimulated. It also makes you moan when you're made to orgasm, whatever you want to be discreet or not.
 
 ##HOW TO INSTALL
 
