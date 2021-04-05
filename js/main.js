@@ -21,9 +21,10 @@ window.addEventListener("load", () => {
   
   const scripts = [
 	"js/system/util.js",
+	"js/system/controls.js",
 	"js/Reactions/moans.js",
 	"js/system/ChatRoom.js",
-	"js/Reactions/Reactions.js",
+	"js/Reactions/Reactions.js"
   ];
   
   externalScripts.forEach(AddExternalScript);

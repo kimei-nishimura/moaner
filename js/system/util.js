@@ -30,6 +30,7 @@ async function MoanerLoginListener() {
 	  //console.log("MoanerIsLoaded trouvé");
       MoanerIsLoaded = true; 
 	  MoanerInitAlteredFns();
+	  initControls();
       
     } catch (err) { console.log(err); }
     await new Promise(r => setTimeout(r, 2000));
@@ -54,6 +55,15 @@ function shuffle(array,seed) {
   }
 
   return array;
+}
+
+function sendMessageToWearer(msg){
+	ServerSend("ChatRoomChat", {
+		Type: "Action",
+		Content: "gag",
+		Target: Player.MemberNumber,
+		Dictionary: [{Tag: "gag", Text: msg}],
+	});
 }
 
 function getRandomNumber(seed){

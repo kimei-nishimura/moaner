@@ -1,5 +1,7 @@
 # Moaner
  Chrome Extension for Bondage Club. It applies moans in your chat when you're horny and stimulated. It also makes you moan when you're made to orgasm, whatever you want to be discreet or not.
+ 
+
 
 ##HOW TO INSTALL
 
@@ -14,3 +16,17 @@
 	
 other browser 
 	The extension is not avaible (yet) for other browsers. 
+	
+
+30-03-2021
+release 1.3.0
+NEW FEATURES:
+	control commands
+	
+release 1.2.0
+NEW FEATURES:
+	If you get spanked, you"ll be forced to moan. Moans can be pain or pleasure, depending of your spank fetish and your arouse state.
+27/03/2021
+release 1.1.0
+NEW FEATURES:
+	if the vibrator you're wearing is used or changes its setting, you"re forced to moan. This moan will interrupt you as the orgasm does

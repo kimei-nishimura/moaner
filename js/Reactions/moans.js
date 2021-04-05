@@ -4,3 +4,5 @@ const basefactor2Moans=["nyah♥","Aah!","mh","oh!♥","mh♥"];
 const basefactor1Moans=["mh","♥oh♥","ah","...♥"];
 
 const baseOrgasmMoans=["Nya...Ny...NyaaAAaah!","Mmmmh... MMmh... Hhhmmmm...","Oooooh... Mmmmh... OooOOOOh!","Mmmhnn... Nyhmm... Nyah!"];
+
+const basePainMoans=["Aie!","Aoouch!","Eek","ouch","Aow"];

@@ -12,20 +12,120 @@ var PROPORTION_MAX = 40;
 /******************************************************************/
 function reactionExcitation(C, CD) {
 	
-	if(!IsStimulated(C)) return CD;
+	if(talkActive && IsStimulated(C)){
 
-	// Validate nulls
-	if (CD == null) CD = "";
+		// Validate nulls
+		if (CD == null) CD = "";
 
-	// Validates that the preferences allow stuttering
-	if ((C.ArousalSettings == null) || (C.ArousalSettings.AffectStutter == null) || (C.ArousalSettings.AffectStutter != "None")) {
-		return applyMoanToMsg(C,CD);
-		
+		// Validates that the preferences allow stuttering
+		if ((C.ArousalSettings == null) || (C.ArousalSettings.AffectStutter == null) || (C.ArousalSettings.AffectStutter != "None")) {
+			return applyMoanToMsg(C,CD);
+			
+		}
 	}
 
 	// No stutter effect, we return the regular text
 	return CD;
+}
 
+function reactionOrgasm(C){
+	if(orgasmActive && scriptOn && C.MemberNumber==Player.MemberNumber && window.CurrentScreen=="ChatRoom"){
+		if(C.ID==0 && C.MemberNumber==Player.MemberNumber){
+			var moan;
+			var backupChatRoomTargetMemberNumber=null;
+			//doit pas se lancer en prive
+			//doit pas se lancer en /me
+			//doit se lancer uniquement en chat simple
+			msg=ElementValue("InputChat");
+			if(isSimpleChat(msg)){
+				
+				moan=msg+"... "+getOrgasmMoan();
+				
+				ElementValue("InputChat",moan);
+				msg="";
+				ChatRoomSendChat();
+			}
+			else{
+				backupChatRoomTargetMemberNumber=ChatRoomTargetMemberNumber;
+				ChatRoomTargetMemberNumber=null;
+				moan="... "+getOrgasmMoan();
+				ElementValue("InputChat",moan);
+				ChatRoomSendChat();
+				ChatRoomTargetMemberNumber=backupChatRoomTargetMemberNumber;
+				ElementValue("InputChat",msg);
+			} 
+		}
+	}
+}
+
+function reactionTrigger(data){	
+	if(isPlayerTarget(data)){	
+		var msg=ElementValue("InputChat");
+		if(isSimpleChat(msg)){
+			reactionVibe(data);
+			reactionSpank(data);
+		}
+	}
+}
+
+function reactionSpank(data){
+	if(spankActive && isSpank(data)){
+		//récupérer le gémissement à appliquer
+		//datas pour génération des gémissements
+		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
+		var moan = getSpankMoan(Factor, data,Math.random() * 300);
+		var msg=ElementValue("InputChat");
+		if(msg!=""){
+			moan=msg+"... "+moan;						
+		}
+		ElementValue("InputChat",moan);
+		ChatRoomSendChat();		
+	}
+}
+
+function reactionVibe(data){
+	if(vibratorActive && isVibes(data)){
+		//récupérer le gémissement à appliquer
+		//datas pour génération des gémissements
+		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
+		var moan = getMoan(Factor, true,Math.random() * 300);
+		var msg=ElementValue("InputChat");
+		console.log("msg="+msg);
+		if(msg!=""){
+			moan=msg+"... "+moan;						
+		}
+		ElementValue("InputChat",moan);
+		ChatRoomSendChat();		
+	}
+}
+
+function isSpank(data){
+	var array=data.Dictionary;
+	for(index in array){
+		let elem = array[index];  
+        if(elem.Tag=="ActivityName" && elem.Text=="Spank"){
+            return true;
+        }
+	}
+    return false;	
+}
+
+function isVibes(data){
+	if(data.Type=="Action" && data.Content.includes("Vibe")){
+		return true;
+	}
+	return false;	
+}
+
+function isPlayerTarget(data){
+	var array=data.Dictionary;
+	for(index in array){
+		let elem = array[index];  
+        if((elem.Tag=="TargetCharacter" || elem.Tag=="DestinationCharacterName")&& elem.MemberNumber==Player.MemberNumber){
+            return true;
+        }
+	}
+    return false;
 }
 
 function applyMoanToMsg(C,CD){
@@ -130,6 +230,73 @@ function getMoan(Factor, isStimulated,seed){
 	var gemissement=" "+selectMoan(Factor,seed);
 	
 	return gemissement;
+}
+
+function getSpankMoan(Factor, data,seed){
+	let gemissement;
+	//selon le niveau de fetichisme fessée
+	let activity=getActivityTaste("Spank");
+	if(activity== undefined) return "";
+	let activityTaste = activity.Self;
+	//plaisir ou douleur?
+	let douleur = false;		
+	let plaisir = false;
+	let chancesDouleur=Math.ceil(100-activityTaste-(Player.ArousalSettings.Progress*2*activityTaste)/2);
+	chancesDouleur=Math.min(0,chancesDouleur);
+	let rand=Math.random()*100;
+	douleur = rand<chancesDouleur;
+	plaisir = !douleur||rand>(chancesDouleur*0.8);
+	
+	if(douleur){
+		gemissement=getPainMoan();
+	}
+	if(plaisir){
+		let pleasureMoan="♥"+getMoan(Factor,true,300)+"♥";
+		if(douleur){
+			gemissement=gemissement+"..."+ pleasureMoan;
+		}
+		else{
+			gemissement=pleasureMoan;
+		}
+	}
+	return gemissement;
+}
+
+function getPainMoan(){
+	let index=Math.floor(Math.random(basePainMoans.length));
+	return basePainMoans[index];
+}
+
+function getZoneTaste(data){
+	let zone;
+	let taste;
+	for(index in data.Dictionary){
+        var elem=data.Dictionary[index];
+		if(elem.Tag=="ActivityGroup") zone= getZone(elem.Text);
+	}
+	if(zone==undefined||zone==null||zone.Factor==undefined){
+		return undefined;
+	}
+	taste=zone.Factor;
+	if(zone.Orgasm==true){
+		taste*=2;
+	}
+	
+	return taste;
+}
+
+function getZone(name){
+	for(index in Player.ArousalSettings.Activity){
+        var zone=Player.ArousalSettings.Zone[index];
+		if(zone.Name==name) return zone;
+	}
+}
+
+function getActivityTaste(name){
+	for(index in Player.ArousalSettings.Activity){
+        var activity=Player.ArousalSettings.Activity[index];
+		if(activity.Name==name) return activity;
+	}
 }
 
 
