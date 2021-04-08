@@ -73,7 +73,7 @@ function reactionSpank(data){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
 		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
-		var moan = getSpankMoan(Factor, data,Math.random() * 300);
+		var moan = getSpankMoan(Factor, Math.random() * 300);
 		var msg=ElementValue("InputChat");
 		if(msg!=""){
 			moan=msg+"... "+moan;						
