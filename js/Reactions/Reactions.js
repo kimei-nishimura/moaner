@@ -232,38 +232,34 @@ function getMoan(Factor, isStimulated,seed){
 	return gemissement;
 }
 
-function getSpankMoan(Factor, data,seed){
+function getSpankMoan(Factor, seed){
 	let gemissement;
 	//selon le niveau de fetichisme fessée
 	let activity=getActivityTaste("Spank");
 	if(activity== undefined) return "";
 	let activityTaste = activity.Self;
-	//plaisir ou douleur?
-	let douleur = false;		
-	let plaisir = false;
-	let chancesDouleur=Math.ceil(100-activityTaste-(Player.ArousalSettings.Progress*2*activityTaste)/2);
-	chancesDouleur=Math.min(0,chancesDouleur);
-	let rand=Math.random()*100;
-	douleur = rand<chancesDouleur;
-	plaisir = !douleur||rand>(chancesDouleur*0.8);
 	
+	let seuilDouleur=Math.min(10,(4-activityTaste)*25);
+	let seuilPlaisir=seuilDouleur+40
+	let douleur=Player.ArousalSettings.Progress <=seuilDouleur;
+	let plaisir=Player.ArousalSettings.Progress>seuilPlaisir;
 	if(douleur){
 		gemissement=getPainMoan();
 	}
-	if(plaisir){
-		let pleasureMoan="♥"+getMoan(Factor,true,300)+"♥";
-		if(douleur){
-			gemissement=gemissement+"..."+ pleasureMoan;
-		}
-		else{
-			gemissement=pleasureMoan;
-		}
+	else if(plaisir){
+		gemissement="♥"+getMoan(Factor,true,300)+"♥";
 	}
+	else{
+		gemissement=getPainMoan()+"♥"+getMoan(Factor,true,300)+"♥";
+	}
+	
+	
 	return gemissement;
 }
 
 function getPainMoan(){
-	let index=Math.floor(Math.random(basePainMoans.length));
+	let index=Math.floor(Math.random()*basePainMoans.length);
+	console.log("index="+index);
 	return basePainMoans[index];
 }
 
