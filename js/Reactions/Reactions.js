@@ -62,13 +62,17 @@ function reactionTrigger(data){
 	if(isPlayerTarget(data)){	
 		var msg=ElementValue("InputChat");
 		if(isSimpleChat(msg)){
-			reactionVibe(data);
-			reactionSpank(data);
+			reactionVibeWithChat(data);
+			reactionSpankWithChat(data);
+		}
+		else{
+			reactionSpankWithoutChat(data);
+			reactionVibeWithoutChat(data);
 		}
 	}
 }
 
-function reactionSpank(data){
+function reactionSpankWithChat(data){
 	if(spankActive && isSpank(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
@@ -83,7 +87,33 @@ function reactionSpank(data){
 	}
 }
 
-function reactionVibe(data){
+function reactionSpankWithoutChat(data){
+	if(spankActive && isSpank(data)){
+		//récupérer le gémissement à appliquer
+		//datas pour génération des gémissements
+		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
+		var moan = getSpankMoan(Factor, Math.random() * 300);
+		var msg=ElementValue("InputChat");
+		ElementValue("InputChat",moan);
+		ChatRoomSendChat();		
+		ElementValue("InputChat",msg);
+	}
+}
+
+function reactionVibeWithoutChat(data){
+	if(vibratorActive && isVibes(data)){
+		//récupérer le gémissement à appliquer
+		//datas pour génération des gémissements
+		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
+		var moan = getMoan(Factor, true,Math.random() * 300);
+		var msg=ElementValue("InputChat");
+		ElementValue("InputChat",moan);
+		ChatRoomSendChat();	
+		ElementValue("InputChat",msg);	
+	}
+}
+
+function reactionVibeWithChat(data){
 	if(vibratorActive && isVibes(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
@@ -121,7 +151,7 @@ function isPlayerTarget(data){
 	var array=data.Dictionary;
 	for(index in array){
 		let elem = array[index];  
-        if((elem.Tag=="TargetCharacter" || elem.Tag=="DestinationCharacterName")&& elem.MemberNumber==Player.MemberNumber){
+        if((elem.Tag=="DestinationCharacter" || elem.Tag=="TargetCharacter" || elem.Tag=="DestinationCharacterName")&& elem.MemberNumber==Player.MemberNumber){
             return true;
         }
 	}
@@ -209,27 +239,14 @@ function transformText(isStimulated,L,ArouseFactor,CD){
 
 
 
-function getOrgasmMoan(){
-	var gemissement;
-	
-	if(orgasmMoans.length==0){
-		logDebug("getOrgasmMoan: reset list");
-		let seed=3000;
-		logDebug("getOrgasmMoan: seed="+seed);
-		orgasmMoans=shuffle(baseOrgasmMoans.concat([]),seed);
-	}
-	gemissement=orgasmMoans.shift();
-	return gemissement;
-}
+
 
 function getMoan(Factor, isStimulated,seed){
 	//logDebug("getMoan: factor="+Factor);
 	//logDebug("getMoan: isStimulated="+isStimulated);
-	if(!isStimulated) return "-";
+	if(!isStimulated) return "";
 	//sélectionner un gémissement
-	var gemissement=" "+selectMoan(Factor,seed);
-	
-	return gemissement;
+	return " "+selectMoan(Factor,seed);
 }
 
 function getSpankMoan(Factor, seed){
@@ -257,11 +274,7 @@ function getSpankMoan(Factor, seed){
 	return gemissement;
 }
 
-function getPainMoan(){
-	let index=Math.floor(Math.random()*basePainMoans.length);
-	console.log("index="+index);
-	return basePainMoans[index];
-}
+
 
 function getZoneTaste(data){
 	let zone;
@@ -307,13 +320,49 @@ function resetMoans(seed){
 	//logDebug("resetMoans OUT");
 }
 
+function getPainMoanBACK(){
+	let index=Math.floor(Math.random()*basePainMoans.length);
+	return basePainMoans[index];
+}
+
+
+
+function resetMoans(seed){
+	//logDebug("resetMoans IN");
+	moanProfile=getMoans(profileName);
+	factor1Moans=shuffle(moanProfile.low.concat([]),seed);
+	factor2Moans=shuffle(factor1Moans.concat(moanProfile.light),seed);
+	factor3Moans=shuffle(factor2Moans.concat(moanProfile.medium),seed);
+	factor4Moans=shuffle(factor3Moans.concat(moanProfile.hot),seed);
+	//logDebug("resetMoans OUT");
+}
+
+function getPainMoan(){
+	moanProfile=getMoans(profileName);
+	let index=Math.floor(Math.random()*moanProfile.pain.length);
+	return moanProfile.pain[index];
+}
+
+function getOrgasmMoan(){
+	var gemissement;
+	
+	if(orgasmMoans.length==0){
+		logDebug("getOrgasmMoan: reset list");
+		let seed=3000;
+		logDebug("getOrgasmMoan: seed="+seed);
+		moanProfile=getMoans(profileName);
+		orgasmMoans=shuffle(moanProfile.orgasm.concat([]),seed);
+	}
+	gemissement=orgasmMoans.shift();
+	return gemissement;
+}
 
 function selectMoan(Factor,seed){
 	if(Factor<2){
 			//logDebug("factor1Moans.length="+factor1Moans.length);
 		if(factor1Moans.length <= 0){
 			resetMoans(seed);
-			return selectMoan(Factor);
+			return selectMoan(Factor, seed);
 		}else{
 			return factor1Moans.shift();
 		}
@@ -322,7 +371,7 @@ function selectMoan(Factor,seed){
 			//logDebug("factor2Moans.length="+factor2Moans.length);
 		if(factor2Moans.length <= 0){
 			resetMoans(seed);
-			return selectMoan(Factor);
+			return selectMoan(Factor, seed);
 		}else{
 			return factor2Moans.shift();
 		}
@@ -331,7 +380,7 @@ function selectMoan(Factor,seed){
 			//logDebug("factor3Moans.length="+factor3Moans.length);
 		if(factor3Moans.length <= 0){
 			resetMoans(seed);
-			return selectMoan(Factor);
+			return selectMoan(Factor, seed);
 		}else{
 			return factor3Moans.shift();
 		}
@@ -340,7 +389,7 @@ function selectMoan(Factor,seed){
 			//logDebug("factor4Moans.length="+factor4Moans.length);
 		if(factor4Moans.length <= 0){
 			resetMoans(seed);
-			return selectMoan(Factor);
+			return selectMoan(Factor, seed);
 		}else{
 			return factor4Moans.shift();
 		}

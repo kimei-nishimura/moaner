@@ -17,11 +17,35 @@
 other browser 
 	The extension is not avaible (yet) for other browsers. 
 	
+23-04-2021
+release 1.4.2 b
+NEW FEATURES:
+	adding new moans profile: dog
+	
+22-04-2021
+release 1.4.1 b
+NEW FEATURES:
+	adding new moans profile: fox
+	
+22-04-2021
+release 1.4.0 b
+NEW FEATURES:
+	adding profile command:
+		/moaner profile neko: will load specific neko moans set
 
 30-03-2021
 release 1.3.0
 NEW FEATURES:
-	control commands
+	Adding setting commands:
+		/moaner help: show this help text.
+		/moaner talk on: start the talk moan. If you're vibed, you will moan while speaking.
+		/moaner talk off: stop the talk moan. If you're vibed, you will not moan while speaking anymore.
+		/moaner orgasm on: start the orgasm moan. You will moan while cumming.
+		/moaner orgasm off: stop the orgasm moan. You will not moan while cumming anymore.
+		/moaner vibe on: start the vibes moan. If your vibrator's setting changes, you will moan.
+		/moaner vibe off: stop the vibes moan. If your vibrator's setting changes, you will not moan.
+		/moaner spank on: start the spank moan. You will moan while being spanked.
+		/moaner spank off: stop the spank moan. You will not moan while being spanked.
 	
 release 1.2.0
 NEW FEATURES:

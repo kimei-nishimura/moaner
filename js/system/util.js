@@ -37,6 +37,13 @@ async function MoanerLoginListener() {
   }
 }
 
+function getKeys(obj){
+   var keys = [];
+   for(var key in obj){
+      keys.push(key);
+   }
+   return keys;
+}
 
 function shuffle(array,seed) {
   var currentIndex = array.length, temporaryValue, randomIndex;

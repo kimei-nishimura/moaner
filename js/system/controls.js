@@ -17,6 +17,7 @@ const featureVibrator="vibe";
 const featureSpank="spank";
 const featureHelp="help";
 const featureVerbose="verbose";
+const featureProfile="profile";
 
 var talkActive=true;
 var orgasmActive=true;
@@ -32,8 +33,11 @@ var vibratorStatus=["The vibes moan is active. If your vibrator's setting change
 var spankStatus=["The spank moan is active. You will moan while being spanked.","The spank moan is not active. You will not moan while being spanked."];
 var talkStatus=["The talk moan is active. If you're vibed, you will moan while speaking.","The talk moan is not active. If you're vibed, you will not moan while speaking anymore."];
 var verboseStatus=["Moaner is verbose.","Moaner is not verbose."];
+var profileStatus=["No custom profile loaded.","Current moans profile: "];
+var profileListIntro="Available moaning profiles: ";
 
-var scriptHelp="Moaner commands available: /moaner help: show this help text. /moaner talk on: start the talk moan. /moaner talk off: stop the talk moan. /moaner orgasm on: start the orgasm moan. /moaner orgasm off: stop the orgasm moan. /moaner vibe on: start the vibes moan. /moaner vibe off: stop the vibes moan. /moaner spank on: start the spank moan. /moaner spank off: stop the spank moan. ";
+var scriptHelp="Moaner commands available: /moaner help: show this help text. /moaner on: start the moaner. /moaner off: stop the moaner. /moaner talk on: start the talk moan. /moaner talk off: stop the talk moan. /moaner orgasm on: start the orgasm moan. /moaner orgasm off: stop the orgasm moan. /moaner vibe on: start the vibes moan. /moaner vibe off: stop the vibes moan. /moaner spank on: start the spank moan. /moaner spank off: stop the spank moan. /moaner verbose on: make the script verbose. /moaner verbose off: make the script not verbose. /moaner profile: show profiles help. /moaner profile [profile name]: use [prodile name] moans";
+
 var intro="Myrhanda Moaner installed. Type /moaner help for more informations.";
 var unknownCommand="Unknown command";
 
@@ -65,6 +69,9 @@ function traiterCommande(msg){
 	else if(feature==featureVerbose){
 		verboseControl(commande);
 	}
+	else if(feature==featureProfile){
+		profileControl(commande);
+	}
 	else{
 		sendUnknownCommand();
 		return "";
@@ -86,6 +93,7 @@ function initControls(){
 		vibratorActive=true;
 		spankActive=true;
 		scriptOn=true;
+		profileName="default";
 		//saveControls();
 	}else{
 		talkActive=datas.talkMoan;
@@ -93,6 +101,7 @@ function initControls(){
 		vibratorActive=datas.vibeMoan;
 		spankActive=datas.spankMoan;
 		scriptOn=datas.script;
+		profileName=datas.moanProfile;
 	}	
 	
 }
@@ -103,7 +112,8 @@ function saveControls(){
 		"orgasmMoan":orgasmActive,
 		"vibeMoan":vibratorActive,
 		"spankMoan":spankActive,
-		"script":scriptOn
+		"script":scriptOn,
+		"moanProfile":profileName
 	};
 	localStorage.setItem(moanerKey+"_"+Player.MemberNumber,JSON.stringify(controls));
 	
@@ -116,6 +126,22 @@ function deleteControls(){
 			localStorage.removeItem(key);			
 		}
 	  }
+}
+
+function startMoanScript(){
+	scriptOn=true;
+}
+
+//controle sur les profils
+function profileControl(commande){
+	
+	if(commande==undefined || commande==featureHelp){
+		profilesList();
+	}
+	else {
+		activerProfile(commande);
+	}
+	showprofileStatus();
 }
 
 //controle sur le script entier
@@ -221,13 +247,31 @@ function helpControl(){
 	showStatus();
 }
 
+function profilesList(){
+	let liste=getKeys(moansProfiles);
+	let msg=profileListIntro+liste;
+	sendMessageToWearer(msg);
+}
+
 function showStatus(){
 	showScriptStatus();
+	showprofileStatus();
 	showTalkStatus();
 	showOrgasmStatus();
 	showVibratorStatus();
-	showSpankStatus();
+	showSpankStatus();	
 	showVerboseStatus();	
+}
+
+function showprofileStatus(){
+	if(!verboseActive){return;}
+	let msg;
+	if(profileName=="default"){
+		msg=profileStatus[0];
+	}else{
+		msg=profileStatus[1]+profileName;
+	}
+	sendMessageToWearer(msg);
 }
 
 function showVerboseStatus(){

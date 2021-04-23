@@ -1,8 +1,8 @@
-var backupChatRoomSendChat;
+/*var backupChatRoomSendChat;
 var backupActivityOrgasmPrepare;
 var backupActivityOrgasmStart;
 var backupChatRoomMessage;
-var backupChatRoomFirstTimeHelp;
+var backupChatRoomFirstTimeHelp;*/
 var scriptOn=true;
 
 
@@ -21,7 +21,7 @@ function MoanerInitAlteredFns(){
 }
 
 function initChatRoomFirstTimeHelpOverride() {
-	backupChatRoomFirstTimeHelp = ChatRoomFirstTimeHelp;
+	let backupChatRoomFirstTimeHelp = ChatRoomFirstTimeHelp;
 	ChatRoomFirstTimeHelp = () => {
 		firstHelp();
 		backupChatRoomFirstTimeHelp();
@@ -32,7 +32,7 @@ function initChatRoomFirstTimeHelpOverride() {
 var tempChatRoomData;
 function initChatRoomMessageOverride (){
 	logDebug("Entree initChatRoomOverride pour ChatRoomMessage");
-	backupChatRoomMessage = ChatRoomMessage;
+	let backupChatRoomMessage = ChatRoomMessage;
 	ChatRoomMessage = (data) => {
 		if(scriptOn && window.CurrentScreen=="ChatRoom"){
 			tempChatRoomData=data;	
@@ -78,7 +78,7 @@ function initChatRoomSendChatCommands(){
 
 function initActivityOrgasmStart(){
 	
-	backupActivityOrgasmStart = ActivityOrgasmStart;
+	let backupActivityOrgasmStart = ActivityOrgasmStart;
 		ActivityOrgasmStart = (C) => {	
 		
 		if(scriptOn){
@@ -88,9 +88,9 @@ function initActivityOrgasmStart(){
 	};
 }
 
-function startMoanScript(){
+/*function startMoanScript(){
 	scriptOn=true;
-}
+}*/
 function stopMoanScript(){
 	scriptOn=false;
 }
@@ -98,7 +98,7 @@ function isCommande(msg){
 	return msg.startsWith("/")&&ChatRoomTargetMemberNumber==null;
 }
 function isSimpleChat(msg){
-	return !msg.startsWith("/")&&!msg.startsWith("*")&&ChatRoomTargetMemberNumber==null;
+	return msg.trim().length>0 && !msg.startsWith("/")&&!msg.startsWith("(")&&!msg.startsWith("*")&&ChatRoomTargetMemberNumber==null;
 }
 
 function isInChatRoom(){
