@@ -43,6 +43,7 @@ var moansProfiles=[];
 function activerProfile(name){
 	if(moansProfiles[name]==undefined){
 		profileName="default";
+		resetMoans(Math.random()*300);
 	}
 	else{
 		profileName=name;

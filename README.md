@@ -18,6 +18,11 @@ other browser
 	The extension is not avaible (yet) for other browsers. 
 	
 23-04-2021
+release 1.4.3 b
+NEW FEATURES:
+	adding new moans profile: mouse
+	
+23-04-2021
 release 1.4.2 b
 NEW FEATURES:
 	adding new moans profile: dog

@@ -43,3 +43,16 @@ dogMoans={
 	"pain":["Kaï!","Aoouch!","Kaaaï!","Ouch","Aow"]
 }
 addMoansProfile("dog",dogMoans);
+
+//mouse
+//base coui
+
+mouseMoans={
+	"hot":["Scouiiic♥","couiiic♥"],
+	"medium":["scouiii♥","Couyk","..scoui"],
+	"light":["Scouii♥","Coui!","kouu♥ic","Couic ♥"],
+	"low":["coui..","scoui♥","cou♥i","Couic ","koui♥"],
+	"orgasm":["Couic♥ sc.. couIIIiic!!","Mmmhnn... ooo... ouiiiic!!","mmmh... Scouuu.... Scouiiic!"],
+	"pain":[]
+}
+addMoansProfile("mouse",mouseMoans);
