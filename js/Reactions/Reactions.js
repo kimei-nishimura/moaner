@@ -1,35 +1,36 @@
 
-var orgasmMoans=[];
+var M_MOANER_orgasmMoans=[];
 
-var factor4Moans=[];
-var factor3Moans=[];
-var factor2Moans=[];
+var M_MOANER_factor4Moans=[];
+var M_MOANER_factor3Moans=[];
+var M_MOANER_factor2Moans=[];
 var factor1Moans=[];
 var PROPORTION_MAX = 40;
 
 /******************************************************************/
 //réagir au chat
 /******************************************************************/
-function reactionExcitation(C, CD) {
+function M_MOANER_reactionExcitation(C, CD) {
 	
-	if(talkActive && IsStimulated(C)){
+	if(M_MOANER_talkActive && IsStimulated(C)){
 
 		// Validate nulls
 		if (CD == null) CD = "";
 
 		// Validates that the preferences allow stuttering
-		if ((C.ArousalSettings == null) || (C.ArousalSettings.AffectStutter == null) || (C.ArousalSettings.AffectStutter != "None")) {
-			return applyMoanToMsg(C,CD);
+		/*if ((C.ArousalSettings == null) || (C.ArousalSettings.AffectStutter == null) || (C.ArousalSettings.AffectStutter != "None")) {
+			return M_MOANER_applyMoanToMsg(C,CD);
 			
-		}
+		}*/
+		return M_MOANER_applyMoanToMsg(C,CD);
 	}
 
 	// No stutter effect, we return the regular text
 	return CD;
 }
 
-function reactionOrgasm(C){
-	if(orgasmActive && scriptOn && C.MemberNumber==Player.MemberNumber && window.CurrentScreen=="ChatRoom"){
+function M_MOANER_reactionOrgasm(C){
+	if(M_MOANER_orgasmActive && M_MOANER_scriptOn && C.MemberNumber==Player.MemberNumber && window.CurrentScreen=="ChatRoom"){
 		if(C.ID==0 && C.MemberNumber==Player.MemberNumber){
 			var moan;
 			var backupChatRoomTargetMemberNumber=null;
@@ -37,7 +38,7 @@ function reactionOrgasm(C){
 			//doit pas se lancer en /me
 			//doit se lancer uniquement en chat simple
 			msg=ElementValue("InputChat");
-			if(isSimpleChat(msg)){
+			if(M_MOANER_isSimpleChat(msg)){
 				
 				moan=msg+"... "+getOrgasmMoan();
 				
@@ -58,22 +59,22 @@ function reactionOrgasm(C){
 	}
 }
 
-function reactionTrigger(data){	
-	if(isPlayerTarget(data)){	
+function M_MOANER_reactionTrigger(data){	
+	if(M_MOANER_isPlayerTarget(data)){	
 		var msg=ElementValue("InputChat");
-		if(isSimpleChat(msg)){
-			reactionVibeWithChat(data);
-			reactionSpankWithChat(data);
+		if(M_MOANER_isSimpleChat(msg)){
+			M_MOANER_reactionVibeWithChat(data);
+			M_MOANER_reactionSpankWithChat(data);
 		}
 		else{
-			reactionSpankWithoutChat(data);
-			reactionVibeWithoutChat(data);
+			M_MOANER_reactionSpankWithoutChat(data);
+			M_MOANER_reactionVibeWithoutChat(data);
 		}
 	}
 }
 
-function reactionSpankWithChat(data){
-	if(spankActive && isSpank(data)){
+function M_MOANER_reactionSpankWithChat(data){
+	if(M_MOANER_spankActive && M_MOANER_isSpank(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
 		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
@@ -87,34 +88,40 @@ function reactionSpankWithChat(data){
 	}
 }
 
-function reactionSpankWithoutChat(data){
-	if(spankActive && isSpank(data)){
+function M_MOANER_reactionSpankWithoutChat(data){
+	if(M_MOANER_spankActive && M_MOANER_isSpank(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
 		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
 		var moan = getSpankMoan(Factor, Math.random() * 300);
 		var msg=ElementValue("InputChat");
+		let backtarget=ChatRoomTargetMemberNumber;
+		ChatRoomTargetMemberNumber=null;
 		ElementValue("InputChat",moan);
 		ChatRoomSendChat();		
 		ElementValue("InputChat",msg);
+		ChatRoomTargetMemberNumber=backtarget;
 	}
 }
 
-function reactionVibeWithoutChat(data){
-	if(vibratorActive && isVibes(data)){
+function M_MOANER_reactionVibeWithoutChat(data){
+	if(M_MOANER_vibratorActive && M_MOANER_isVibes(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
 		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
 		var moan = getMoan(Factor, true,Math.random() * 300);
 		var msg=ElementValue("InputChat");
+		let backtarget=ChatRoomTargetMemberNumber;
+		ChatRoomTargetMemberNumber=null;
 		ElementValue("InputChat",moan);
 		ChatRoomSendChat();	
 		ElementValue("InputChat",msg);	
+		ChatRoomTargetMemberNumber=backtarget;
 	}
 }
 
-function reactionVibeWithChat(data){
-	if(vibratorActive && isVibes(data)){
+function M_MOANER_reactionVibeWithChat(data){
+	if(M_MOANER_vibratorActive && M_MOANER_isVibes(data)){
 		//récupérer le gémissement à appliquer
 		//datas pour génération des gémissements
 		var Factor = Math.floor(Player.ArousalSettings.Progress / 20);
@@ -129,25 +136,32 @@ function reactionVibeWithChat(data){
 	}
 }
 
-function isSpank(data){
+function M_MOANER_isSpank(data){
 	var array=data.Dictionary;
 	for(index in array){
 		let elem = array[index];  
-        if(elem.Tag=="ActivityName" && elem.Text=="Spank"){
-            return true;
+        if(elem.Tag=="ActivityName"){
+			if(elem.Text=="Spank" || elem.Text=="Slap" ){
+				return true;
+			}
+        }  
+        if(elem.Tag=="NextAsset"){
+			if(elem.AssetName=="SpankingToys"){
+				return true;
+			}
         }
 	}
     return false;	
 }
 
-function isVibes(data){
+function M_MOANER_isVibes(data){
 	if(data.Type=="Action" && data.Content.includes("Vibe")){
 		return true;
 	}
 	return false;	
 }
 
-function isPlayerTarget(data){
+function M_MOANER_isPlayerTarget(data){
 	var array=data.Dictionary;
 	for(index in array){
 		let elem = array[index];  
@@ -158,13 +172,13 @@ function isPlayerTarget(data){
     return false;
 }
 
-function applyMoanToMsg(C,CD){
+function M_MOANER_applyMoanToMsg(C,CD){
 	//déterminer le nombre de gémissements
 		//calculer ça en fonction du nombre de mots
 		//proportion: PROPORTION_MAX*niveauExcitation
 		//PROPORTION_MAX=40%
 		var proportion = C.ArousalSettings.Progress * PROPORTION_MAX/10000;
-		logDebug("proportion: "+proportion);
+		M_MOANER_logDebug("proportion: "+proportion);
 		var CDList = CD.split(" ");
 		
 		var currentIndex=0;
@@ -177,7 +191,7 @@ function applyMoanToMsg(C,CD){
 		while(currentIndex<CDList.length){
 			//si le prochain mot contient une parenthèse, on arrète la répartission des gémissements)
 			var currentWord=CDList[currentIndex++];
-			var presenceParenthese=detectParentheses(currentWord);
+			var presenceParenthese=M_MOANER_detectParentheses(currentWord);
 			if(presenceParenthese==1){
 				stop=true;
 			}
@@ -209,7 +223,7 @@ function applyMoanToMsg(C,CD){
 }
 
 //return 1 if opening bracket, 2 of closing bracket, 0 otherwise
-function detectParentheses(CD){
+function M_MOANER_detectParentheses(CD){
 	if(!CD.includes("(") && !CD.includes(")")){
 		return 0;
 	}
@@ -242,8 +256,8 @@ function transformText(isStimulated,L,ArouseFactor,CD){
 
 
 function getMoan(Factor, isStimulated,seed){
-	//logDebug("getMoan: factor="+Factor);
-	//logDebug("getMoan: isStimulated="+isStimulated);
+	//M_MOANER_logDebug("getMoan: factor="+Factor);
+	//M_MOANER_logDebug("getMoan: isStimulated="+isStimulated);
 	if(!isStimulated) return "";
 	//sélectionner un gémissement
 	return " "+selectMoan(Factor,seed);
@@ -311,13 +325,13 @@ function getActivityTaste(name){
 
 
 function resetMoans(seed){
-	//logDebug("resetMoans IN");
+	//M_MOANER_logDebug("resetMoans IN");
 	
-	factor1Moans=shuffle(basefactor1Moans.concat([]),seed);
-	factor2Moans=shuffle(factor1Moans.concat(basefactor2Moans),seed);
-	factor3Moans=shuffle(factor2Moans.concat(basefactor3Moans),seed);
-	factor4Moans=shuffle(factor3Moans.concat(basefactor4Moans),seed);
-	//logDebug("resetMoans OUT");
+	factor1Moans=M_MOANER_shuffle(basefactor1Moans.concat([]),seed);
+	M_MOANER_factor2Moans=M_MOANER_shuffle(factor1Moans.concat(baseM_MOANER_factor2Moans),seed);
+	M_MOANER_factor3Moans=M_MOANER_shuffle(M_MOANER_factor2Moans.concat(baseM_MOANER_factor3Moans),seed);
+	M_MOANER_factor4Moans=M_MOANER_shuffle(M_MOANER_factor3Moans.concat(baseM_MOANER_factor4Moans),seed);
+	//M_MOANER_logDebug("resetMoans OUT");
 }
 
 function getPainMoanBACK(){
@@ -328,17 +342,17 @@ function getPainMoanBACK(){
 
 
 function resetMoans(seed){
-	//logDebug("resetMoans IN");
-	moanProfile=getMoans(profileName);
-	factor1Moans=shuffle(moanProfile.low.concat([]),seed);
-	factor2Moans=shuffle(factor1Moans.concat(moanProfile.light),seed);
-	factor3Moans=shuffle(factor2Moans.concat(moanProfile.medium),seed);
-	factor4Moans=shuffle(factor3Moans.concat(moanProfile.hot),seed);
-	//logDebug("resetMoans OUT");
+	//M_MOANER_logDebug("resetMoans IN");
+	moanProfile=M_MOANER_getMoans(profileName);
+	factor1Moans=M_MOANER_shuffle(moanProfile.low.concat([]),seed);
+	M_MOANER_factor2Moans=M_MOANER_shuffle(factor1Moans.concat(moanProfile.light),seed);
+	M_MOANER_factor3Moans=M_MOANER_shuffle(M_MOANER_factor2Moans.concat(moanProfile.medium),seed);
+	M_MOANER_factor4Moans=M_MOANER_shuffle(M_MOANER_factor3Moans.concat(moanProfile.hot),seed);
+	//M_MOANER_logDebug("resetMoans OUT");
 }
 
 function getPainMoan(){
-	moanProfile=getMoans(profileName);
+	moanProfile=M_MOANER_getMoans(profileName);
 	let index=Math.floor(Math.random()*moanProfile.pain.length);
 	return moanProfile.pain[index];
 }
@@ -346,20 +360,20 @@ function getPainMoan(){
 function getOrgasmMoan(){
 	var gemissement;
 	
-	if(orgasmMoans.length==0){
-		logDebug("getOrgasmMoan: reset list");
+	if(M_MOANER_orgasmMoans.length==0){
+		M_MOANER_logDebug("getOrgasmMoan: reset list");
 		let seed=3000;
-		logDebug("getOrgasmMoan: seed="+seed);
-		moanProfile=getMoans(profileName);
-		orgasmMoans=shuffle(moanProfile.orgasm.concat([]),seed);
+		M_MOANER_logDebug("getOrgasmMoan: seed="+seed);
+		moanProfile=M_MOANER_getMoans(profileName);
+		M_MOANER_orgasmMoans=M_MOANER_shuffle(moanProfile.orgasm.concat([]),seed);
 	}
-	gemissement=orgasmMoans.shift();
+	gemissement=M_MOANER_orgasmMoans.shift();
 	return gemissement;
 }
 
 function selectMoan(Factor,seed){
 	if(Factor<2){
-			//logDebug("factor1Moans.length="+factor1Moans.length);
+			//M_MOANER_logDebug("factor1Moans.length="+factor1Moans.length);
 		if(factor1Moans.length <= 0){
 			resetMoans(seed);
 			return selectMoan(Factor, seed);
@@ -368,30 +382,30 @@ function selectMoan(Factor,seed){
 		}
 	}
 	else if(Factor<3){
-			//logDebug("factor2Moans.length="+factor2Moans.length);
-		if(factor2Moans.length <= 0){
+			//M_MOANER_logDebug("M_MOANER_factor2Moans.length="+M_MOANER_factor2Moans.length);
+		if(M_MOANER_factor2Moans.length <= 0){
 			resetMoans(seed);
 			return selectMoan(Factor, seed);
 		}else{
-			return factor2Moans.shift();
+			return M_MOANER_factor2Moans.shift();
 		}
 	}
 	else if(Factor<4){
-			//logDebug("factor3Moans.length="+factor3Moans.length);
-		if(factor3Moans.length <= 0){
+			//M_MOANER_logDebug("M_MOANER_factor3Moans.length="+M_MOANER_factor3Moans.length);
+		if(M_MOANER_factor3Moans.length <= 0){
 			resetMoans(seed);
 			return selectMoan(Factor, seed);
 		}else{
-			return factor3Moans.shift();
+			return M_MOANER_factor3Moans.shift();
 		}
 	}
 	else if(Factor>=4){
-			//logDebug("factor4Moans.length="+factor4Moans.length);
-		if(factor4Moans.length <= 0){
+			//M_MOANER_logDebug("M_MOANER_factor4Moans.length="+M_MOANER_factor4Moans.length);
+		if(M_MOANER_factor4Moans.length <= 0){
 			resetMoans(seed);
 			return selectMoan(Factor, seed);
 		}else{
-			return factor4Moans.shift();
+			return M_MOANER_factor4Moans.shift();
 		}
 	}
 }

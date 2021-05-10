@@ -1,15 +1,15 @@
-/*const basefactor4Moans=["n... Nyah♥","Oooh","mmmmmh!","NYyaaA♥"];
-const basefactor3Moans=["mm","aaaah","nyAh♥"];
-const basefactor2Moans=["nyah♥","Aah!","mh","oh!♥","mh♥"];
+/*const baseM_MOANER_factor4Moans=["n... Nyah♥","Oooh","mmmmmh!","NYyaaA♥"];
+const baseM_MOANER_factor3Moans=["mm","aaaah","nyAh♥"];
+const baseM_MOANER_factor2Moans=["nyah♥","Aah!","mh","oh!♥","mh♥"];
 const basefactor1Moans=["mh","♥oh♥","ah","...♥"];
 
-const baseOrgasmMoans=["Nya...Ny...NyaaAAaah!","Mmmmh... MMmh... Hhhmmmm...","Oooooh... Mmmmh... OooOOOOh!","Mmmhnn... Nyhmm... Nyah!"];
+const baseM_MOANER_orgasmMoans=["Nya...Ny...NyaaAAaah!","Mmmmh... MMmh... Hhhmmmm...","Oooooh... Mmmmh... OooOOOOh!","Mmmhnn... Nyhmm... Nyah!"];
 
 const basePainMoans=["Aie!","Aoouch!","Eek","ouch","Aow"];*/
 
-var profileName="default";
+var M_MOANER_profileName="default";
 
-defaultMoans={
+M_MOANER_defaultMoans={
 	"hot":["n... Nyah♥","Oooh","mmmmmh!","NYyaaA♥"],
 	"medium":["mm","aaaah","nyAh♥"],
 	"light":["nyah♥","Aah!","mh","oh!♥","mh♥"],
@@ -18,7 +18,7 @@ defaultMoans={
 	"pain":["Aie!","Aoouch!","Aaaaie!","Ouch","Aow"]
 }
 
-customMoans={
+M_MOANER_customMoans={
 	"hot":[],
 	"medium":[],
 	"light":[],
@@ -38,10 +38,10 @@ customMoans={
 
 
 
-var moansProfiles=[];
+var M_MOANER_moansProfiles=[];
 
-function activerProfile(name){
-	if(moansProfiles[name]==undefined){
+function M_MOANER_activerProfile(name){
+	if(M_MOANER_moansProfiles[name]==undefined){
 		profileName="default";
 		resetMoans(Math.random()*300);
 	}
@@ -51,41 +51,41 @@ function activerProfile(name){
 	}
 }
 
-function getMoans(name){
-	var pleasureMoans=moansProfiles[name];
+function M_MOANER_getMoans(name){
+	var pleasureMoans=M_MOANER_moansProfiles[name];
 	if(pleasureMoans==undefined){
-		pleasureMoans=defaultMoans;
+		pleasureMoans=M_MOANER_defaultMoans;
 	}
 	return pleasureMoans;
 }
 
-function addMoansProfile(name,pleasure){
+function M_MOANER_addMoansProfile(name,pleasure){
 	if(pleasure.hot==undefined || pleasure.hot.length==0){
-		pleasure.hot=defaultMoans.hot;
+		pleasure.hot=M_MOANER_defaultMoans.hot;
 	}
 	if(pleasure.medium==undefined || pleasure.medium.length==0){
-		pleasure.medium=defaultMoans.medium;
+		pleasure.medium=M_MOANER_defaultMoans.medium;
 	}
 	if(pleasure.light==undefined || pleasure.light.length==0){
-		pleasure.light=defaultMoans.light;
+		pleasure.light=M_MOANER_defaultMoans.light;
 	}
 	if(pleasure.low==undefined || pleasure.low.length==0){
-		pleasure.low=defaultMoans.low;
+		pleasure.low=M_MOANER_defaultMoans.low;
 	}
 	if(pleasure.orgasm==undefined || pleasure.orgasm.length==0){
-		pleasure.orgasm=defaultMoans.orgasm;
+		pleasure.orgasm=M_MOANER_defaultMoans.orgasm;
 	}
 	if(pleasure.pain==undefined || pleasure.pain.length==0){
-		pleasure.pain=defaultMoans.pain;
+		pleasure.pain=M_MOANER_defaultMoans.pain;
 	}
 
-	moansProfiles[name]=pleasure;
+	M_MOANER_moansProfiles[name]=pleasure;
 
 }
 
 function addLowMoans(name,pleasureList){
 
-	var profile=moansProfiles[name];
+	var profile=M_MOANER_moansProfiles[name];
 	if(profile==undefined){
 		profiledefaultPleasureMoans;
 	}
@@ -93,4 +93,4 @@ function addLowMoans(name,pleasureList){
 	addMoansProfile(name,profile);
 
 }
-addMoansProfile("default",defaultMoans);
+M_MOANER_addMoansProfile("default",M_MOANER_defaultMoans);

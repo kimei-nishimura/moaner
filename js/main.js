@@ -3,23 +3,23 @@
 
 window.addEventListener("load", () => {
 
-  function AddExternalScript(scriptLink) {
+  function M_MOANER_AddExternalScript(scriptLink) {
 	let script = document.createElement("script");
 	script.src = scriptLink;
 	script.src.async = false;
 	return document.head.appendChild(script);
   }
   
-  function AddScript(scriptFileName) {
+  function M_MOANER_AddScript(scriptFileName) {
 	let script = document.createElement("script");
 	script.src = chrome.runtime.getURL(scriptFileName);
 	return document.head.appendChild(script);
   }
   
-  const externalScripts = [];
+  const M_MOANER_externalScripts = [];
   
   
-  const scripts = [
+  const M_MOANER_scripts = [
 	"js/system/util.js",
 	"js/system/controls.js",
 	"js/Reactions/moansManagement.js",
@@ -28,8 +28,8 @@ window.addEventListener("load", () => {
 	"js/moans.js"
   ];
   
-  externalScripts.forEach(AddExternalScript);
-  scripts.forEach(AddScript);
+  M_MOANER_externalScripts.forEach(M_MOANER_AddExternalScript);
+  M_MOANER_scripts.forEach(M_MOANER_AddScript);
   
 
 });

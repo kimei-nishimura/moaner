@@ -3,24 +3,24 @@ var backupActivityOrgasmPrepare;
 var backupActivityOrgasmStart;
 var backupChatRoomMessage;
 var backupChatRoomFirstTimeHelp;*/
-var scriptOn=true;
+var M_MOANER_scriptOn=true;
 
 
-function MoanerInitAlteredFns(){
+function M_MOANER_MoanerInitAlteredFns(){
 	//interpreter les commandes
-	initChatRoomSendChatCommands();
+	M_MOANER_initChatRoomSendChatCommands();
 	//gemissements quand on parle
-	initChatRoomSendChatOverride();
+	M_MOANER_initChatRoomSendChatOverride();
 	//initActivityOrgasmPrepareOverride();
-	initActivityOrgasmStart();
+	M_MOANER_initActivityOrgasmStart();
 	//gemissements quand on recoit une stimulation
-	initChatRoomMessageOverride ();
+	M_MOANER_initChatRoomMessageOverride ();
 	//message d'aide
-	initChatRoomFirstTimeHelpOverride();
+	M_MOANER_initChatRoomFirstTimeHelpOverride();
 	
 }
 
-function initChatRoomFirstTimeHelpOverride() {
+function M_MOANER_initChatRoomFirstTimeHelpOverride() {
 	let backupChatRoomFirstTimeHelp = ChatRoomFirstTimeHelp;
 	ChatRoomFirstTimeHelp = () => {
 		firstHelp();
@@ -29,16 +29,16 @@ function initChatRoomFirstTimeHelpOverride() {
 }
 
 
-var tempChatRoomData;
-function initChatRoomMessageOverride (){
-	logDebug("Entree initChatRoomOverride pour ChatRoomMessage");
+var M_MOANER_tempChatRoomData;
+function M_MOANER_initChatRoomMessageOverride (){
+	M_MOANER_logDebug("Entree initChatRoomOverride pour ChatRoomMessage");
 	let backupChatRoomMessage = ChatRoomMessage;
 	ChatRoomMessage = (data) => {
-		if(scriptOn && window.CurrentScreen=="ChatRoom"){
-			tempChatRoomData=data;	
+		if(M_MOANER_scriptOn && window.CurrentScreen=="ChatRoom"){
+			M_MOANER_tempChatRoomData=data;	
 			if(data!=null && data.Content!= undefined && data.Content!=null){	
-				logDebug("lancerReactionTrigger");
-				reactionTrigger(data);
+				M_MOANER_logDebug("lancerM_MOANER_reactionTrigger");
+				M_MOANER_reactionTrigger(data);
 			}
 		}
 		backupChatRoomMessage(data);
@@ -46,61 +46,61 @@ function initChatRoomMessageOverride (){
 }
 
 
-function initChatRoomSendChatOverride(){
-	logDebug("Entree MoanerInitAlteredFns pour ChatRoomSendChat");
+function M_MOANER_initChatRoomSendChatOverride(){
+	M_MOANER_logDebug("Entree M_MOANER_MoanerInitAlteredFns pour ChatRoomSendChat");
 	let backupChatRoomSendChat = ChatRoomSendChat;
 	ChatRoomSendChat = (...rest) => {
 	  
 	  let msg = ElementValue("InputChat").trim();
-	  if(scriptOn && isSimpleChat(msg)){
-		msg=reactionExcitation(Player,msg);
+	  if(M_MOANER_scriptOn && M_MOANER_isSimpleChat(msg)){
+		msg=M_MOANER_reactionExcitation(Player,msg);
 		ElementValue("InputChat",msg);
 	  }
-	  logDebug("msg="+msg);
+	  M_MOANER_logDebug("msg="+msg);
 	  backupChatRoomSendChat(...rest);
-	  logDebug("Sortie ChatRoomSendChat");
+	  M_MOANER_logDebug("Sortie ChatRoomSendChat");
 	};
 }
 
 
-function initChatRoomSendChatCommands(){
+function M_MOANER_initChatRoomSendChatCommands(){
 	let backupChatRoomSendChat = ChatRoomSendChat;
 	ChatRoomSendChat = (...rest) => {
 	  
 	  let msg = ElementValue("InputChat").trim();
-	  if(isCommande(msg)){
-		msg=traiterCommande(msg);//fonction qui lance l'interpretation des commandes
+	  if(M_MOANER_isCommande(msg)){
+		msg=M_MOANER_traiterCommande(msg);//fonction qui lance l'interpretation des commandes
 		ElementValue("InputChat",msg);
 	  }
 	  backupChatRoomSendChat(...rest);
 	};
 }
 
-function initActivityOrgasmStart(){
+function M_MOANER_initActivityOrgasmStart(){
 	
 	let backupActivityOrgasmStart = ActivityOrgasmStart;
 		ActivityOrgasmStart = (C) => {	
 		
-		if(scriptOn){
-			reactionOrgasm(C);
+		if(M_MOANER_scriptOn){
+			M_MOANER_reactionOrgasm(C);
 		}
 		backupActivityOrgasmStart(C);
 	};
 }
 
-/*function startMoanScript(){
-	scriptOn=true;
+/*function M_MOANER_startMoanScript(){
+	M_MOANER_scriptOn=true;
 }*/
-function stopMoanScript(){
-	scriptOn=false;
+function M_MOANER_stopMoanScript(){
+	M_MOANER_scriptOn=false;
 }
-function isCommande(msg){
+function M_MOANER_isCommande(msg){
 	return msg.startsWith("/")&&ChatRoomTargetMemberNumber==null;
 }
-function isSimpleChat(msg){
+function M_MOANER_isSimpleChat(msg){
 	return msg.trim().length>0 && !msg.startsWith("/")&&!msg.startsWith("(")&&!msg.startsWith("*")&&ChatRoomTargetMemberNumber==null;
 }
 
-function isInChatRoom(){
+function M_MOANER_isInChatRoom(){
 	return window.CurrentScreen=="ChatRoom";
 }

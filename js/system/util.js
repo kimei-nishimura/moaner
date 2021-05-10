@@ -1,15 +1,15 @@
 
 
-function logDebug(msg){}
+function M_MOANER_logDebug(msg){}
 
 function startDebug(){
-	logDebug =(msg) =>{
+	M_MOANER_logDebug =(msg) =>{
 		console.log("DEBUG: "+msg);
 	};
 }
 
 function stopDebug(){	
-	logDebug =(msg) =>{
+	M_MOANER_logDebug =(msg) =>{
 		console.log("DEBUG: "+msg);
 	};
 }
@@ -29,15 +29,15 @@ async function MoanerLoginListener() {
 	  //console.log("window.CurrentScreen="+window.CurrentScreen);
 	  //console.log("MoanerIsLoaded trouvé");
       MoanerIsLoaded = true; 
-	  MoanerInitAlteredFns();
-	  initControls();
+	  M_MOANER_MoanerInitAlteredFns();
+	  M_MOANER_initControls();
       
     } catch (err) { console.log(err); }
     await new Promise(r => setTimeout(r, 2000));
   }
 }
 
-function getKeys(obj){
+function M_MOANER_getKeys(obj){
    var keys = [];
    for(var key in obj){
       keys.push(key);
@@ -45,11 +45,11 @@ function getKeys(obj){
    return keys;
 }
 
-function shuffle(array,seed) {
+function M_MOANER_shuffle(array,seed) {
   var currentIndex = array.length, temporaryValue, randomIndex;
-  // While there remain elements to shuffle...
+  // While there remain elements to M_MOANER_shuffle...
   while (0 !== currentIndex) {
-	seed=getRandomNumber(seed);
+	seed=M_MOANER_getRandomNumber(seed);
 
     // Pick a remaining element...
     randomIndex = seed%(array.length-1);
@@ -64,7 +64,7 @@ function shuffle(array,seed) {
   return array;
 }
 
-function sendMessageToWearer(msg){
+function M_MOANER_sendMessageToWearer(msg){
 	ServerSend("ChatRoomChat", {
 		Type: "Action",
 		Content: "gag",
@@ -73,7 +73,7 @@ function sendMessageToWearer(msg){
 	});
 }
 
-function getRandomNumber(seed){
+function M_MOANER_getRandomNumber(seed){
 	let number=Math.floor(Math.abs(Math.sin(seed)*1000));
 	return number;
 }

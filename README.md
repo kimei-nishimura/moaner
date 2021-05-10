@@ -6,7 +6,8 @@
 ##HOW TO INSTALL
 
 ###Chrome
-1. Dowload and unzip the latest version found here: https://github.com/myrhanda/moaner
+1. Dowload and unzip the latest version found here: https://www.dropbox.com/home/BondageClub
+	-Be sure to unzip where you can find it and where you will not need to delete it
 2. Navigate to `chrome://extensions/`
 3. Enable Developer mode
 4. Remove previous versions of the Moaner (if applicable).
@@ -15,10 +16,32 @@
 7. Keep yourself up-to-date in the future. Read the news panel, check the BC discord server.
 	
 other browser 
-	The extension is not avaible (yet) for other browsers. 
+	The extension is not avaible (yet) for other browsers. 03-05-2021
+
+release 1.4.6 
+NEM FEATURES
+	spanking feature now react to spanking items
+CORRECTION:
+	Fix a bug that caused conflict with CURSE extension.	
+
+release 1.4.5 
+CORRECTION:
+	Moanings aren't bound to stuttering anymore.
+	
+28-04-2021
+release 1.4.6 b
+Change: 
+	wild fox profile improvement
+Correction: 
+	a bug that caused spank and vibrate moans to happend into whisp
+	
+28-04-2021
+release 1.4.5 b
+NEW FEATURES:
+	adding new moans profile: wild fox
 	
 23-04-2021
-release 1.4.3 b
+release 1.4.4 b
 NEW FEATURES:
 	adding new moans profile: mouse
 	
