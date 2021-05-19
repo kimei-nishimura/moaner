@@ -21,7 +21,7 @@ MoanerLoginListener();
 async function MoanerLoginListener() {
   while (!MoanerIsLoaded) {
     try {
-      while ((!window.CurrentScreen || window.CurrentScreen == "Login") && !MoanerIsLoaded) {
+      while ((!window.CurrentScreen || window.CurrentScreen == "Login" || (typeof window.CursedStarter === "function" && window.cursedConfig === undefined)) && !MoanerIsLoaded) {
 		  //console.log("cherche isLoaded");
 		  //console.log("window.CurrentScreen="+window.CurrentScreen);
         await new Promise(r => setTimeout(r, 2000));

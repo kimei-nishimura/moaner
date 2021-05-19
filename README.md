@@ -18,6 +18,16 @@
 other browser 
 	The extension is not avaible (yet) for other browsers. 03-05-2021
 
+release 2.1
+FIX
+	Fix a conflict with the Curse that makes the Curse to deactivate the moaner commands.
+	Thanks to Jomshir98 for the help fixing
+	Find the curse here: https://github.com/ace-1331/ace12401-cursedscript/
+
+release 2.0 
+REWRITE
+	Renaming all functions to avoid name collisions 
+
 release 1.4.6 
 NEM FEATURES
 	spanking feature now react to spanking items
