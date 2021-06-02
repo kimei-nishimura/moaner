@@ -138,6 +138,9 @@ function M_MOANER_reactionVibeWithChat(data){
 
 function M_MOANER_isSpank(data){
 	var array=data.Dictionary;
+	if(data.Content=="ActionActivitySpankItem"){
+		return true;
+	}
 	for(index in array){
 		let elem = array[index];  
         if(elem.Tag=="ActivityName"){
@@ -145,11 +148,6 @@ function M_MOANER_isSpank(data){
 				return true;
 			}
         }  
-        if(elem.Tag=="NextAsset"){
-			if(elem.AssetName=="SpankingToys"){
-				return true;
-			}
-        }
 	}
     return false;	
 }

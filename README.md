@@ -18,6 +18,10 @@
 other browser 
 	The extension is not avaible (yet) for other browsers. 03-05-2021
 
+release 2.1.1
+FIX
+	Fix a bug that causes pain moans apply with any items
+
 release 2.1
 FIX
 	Fix a conflict with the Curse that makes the Curse to deactivate the moaner commands.
