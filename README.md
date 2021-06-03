@@ -5,18 +5,24 @@
 
 ##HOW TO INSTALL
 
-###Chrome
-1. Dowload and unzip the latest version found here: https://www.dropbox.com/home/BondageClub
+###Chrome - Edge
+1. Dowload and unzip the latest version found here: https://www.dropbox.com/sh/q8rwl0vbbek95pu/AAAQVZmeRudBkcoMWAQEv_3Va?dl=0
 	-Be sure to unzip where you can find it and where you will not need to delete it
 2. Navigate to `chrome://extensions/`
 3. Enable Developer mode
 4. Remove previous versions of the Moaner (if applicable).
 5. Click `Load unpacked` button and browse to the unzipped folder (see the notes below)
 6. Login to BC, or relog if you were already logged.
-7. Keep yourself up-to-date in the future. Read the news panel, check the BC discord server.
+
+###Firefox
+1. Dowload and unzip the latest version found here: https://www.dropbox.com/sh/e6zq9c8b21d1mmi/AACoB0tc2PPLShTWoGvcv7dNa?dl=0
+2. Navigate to `about:addons`
+3. Remove previous versions of the Moaner (if applicable).
+3. click 'Install a module from a file' in the extention manager and browse to the .xpi file. 
+6. Login to BC, or relog if you were already logged.
 	
-other browser 
-	The extension is not avaible (yet) for other browsers. 03-05-2021
+release 2.1.1 for FireFox
+	Thanks a lot to MissPrussia and Shyness who made this version.
 
 release 2.1.1
 FIX
