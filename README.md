@@ -20,7 +20,10 @@
 3. Remove previous versions of the Moaner (if applicable).
 3. click 'Install a module from a file' in the extention manager and browse to the .xpi file. 
 6. Login to BC, or relog if you were already logged.
-	
+
+release 2.1.2
+	new EU server URL. Thanks to Kimei who made this update
+
 release 2.1.1 for FireFox
 	Thanks a lot to MissPrussia and Shyness who made this version.
 
