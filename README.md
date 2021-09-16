@@ -1,20 +1,19 @@
 # Moaner
  Chrome Extension for Bondage Club. It applies moans in your chat when you're horny and stimulated. It also makes you moan when you're made to orgasm, whatever you want to be discreet or not.
  
-
-
 ##HOW TO INSTALL
 
 ###Chrome - Edge
-1. Dowload and unzip the latest version found here: https://www.dropbox.com/sh/q8rwl0vbbek95pu/AAAQVZmeRudBkcoMWAQEv_3Va?dl=0
-	-Be sure to unzip where you can find it and where you will not need to delete it
-2. Navigate to `chrome://extensions/`
-3. Enable Developer mode
-4. Remove previous versions of the Moaner (if applicable).
-5. Click `Load unpacked` button and browse to the unzipped folder (see the notes below)
-6. Login to BC, or relog if you were already logged.
+1. Dowload and unzip the latest version found here: https://github.com/kimei-nishimura/moaner/releases/tag/2.1.2
+	- (alternate location: https://www.dropbox.com/sh/q8rwl0vbbek95pu/AAAQVZmeRudBkcoMWAQEv_3Va?dl=0
+3. Be sure to unzip where you can find it and where you will not need to delete it
+4. Navigate to `chrome://extensions/`
+5. Enable Developer mode
+6. Remove previous versions of the Moaner (if applicable).
+7. Click `Load unpacked` button and browse to the unzipped folder (see the notes below)
+8. Login to BC, or relog if you were already logged.
 
-###Firefox
+###Firefox (version 2.1.2 for firefox not available yet)
 1. Dowload and unzip the latest version found here: https://www.dropbox.com/sh/e6zq9c8b21d1mmi/AACoB0tc2PPLShTWoGvcv7dNa?dl=0
 2. Navigate to `about:addons`
 3. Remove previous versions of the Moaner (if applicable).
@@ -23,6 +22,7 @@
 
 release 2.1.2
 	new EU server URL. Thanks to Kimei who made this update
+	With 2.1.2, maintenance is being taken over by Kimei.  Thanks to Myrhanda for allowing the project to continue.
 
 release 2.1.1 for FireFox
 	Thanks a lot to MissPrussia and Shyness who made this version.
