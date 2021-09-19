@@ -66,3 +66,14 @@ M_MOANER_wildFoxMoans={
 	"pain":[]
 }
 M_MOANER_addMoansProfile("wildFox",M_MOANER_wildFoxMoans);
+
+//pig
+M_MOANER_pigMoans={
+	"hot":["Gruiik♥","gruik♥"],
+	"medium":["gruiii♥","Gruik","..Grui.."],
+	"light":["Grui♥","Gruik!","gruuiii♥ic","gruik ♥"],
+	"low":["grui.. gruiik♥","gruiik♥","gru♥i","Gruik ","Groi♥"],
+	"orgasm":["Gru♥ gr.. gruiIIIiick!!","Mmmhnn... uii... gruiiik!!","mmmh... Gruiik.... Gruiiiiik!"],
+	"pain":["Gruuik!!","Aoouch!","Awo... gruik!","Ouch","Gruiiik"]
+}
+M_MOANER_addMoansProfile("pig",M_MOANER_pigMoans);
