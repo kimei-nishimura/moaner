@@ -4,8 +4,7 @@
 ##HOW TO INSTALL
 
 ###Chrome - Edge
-1. Dowload and unzip the latest version found here: https://github.com/kimei-nishimura/moaner/releases/tag/2.1.2
-	- (alternate location: https://www.dropbox.com/sh/q8rwl0vbbek95pu/AAAQVZmeRudBkcoMWAQEv_3Va?dl=0
+1. Dowload and unzip the latest version found here: https://github.com/kimei-nishimura/moaner/releases/tag/2.1.3
 3. Be sure to unzip where you can find it and where you will not need to delete it
 4. Navigate to `chrome://extensions/`
 5. Enable Developer mode
