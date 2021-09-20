@@ -13,12 +13,16 @@
 7. Click `Load unpacked` button and browse to the unzipped folder (see the notes below)
 8. Login to BC, or relog if you were already logged.
 
-###Firefox (version 2.1.2 for firefox not available yet)
+###Firefox (version 2.1.3 for firefox not available yet)
 1. Dowload and unzip the latest version found here: https://www.dropbox.com/sh/e6zq9c8b21d1mmi/AACoB0tc2PPLShTWoGvcv7dNa?dl=0
 2. Navigate to `about:addons`
 3. Remove previous versions of the Moaner (if applicable).
 3. click 'Install a module from a file' in the extention manager and browse to the .xpi file. 
 6. Login to BC, or relog if you were already logged.
+
+Release 2.1.3
+	New EU server URL with www appended; club URL changed when R72 was released (Kimei).
+	Added pig noises (Myrhanda)
 
 release 2.1.2
 	new EU server URL. Thanks to Kimei who made this update
